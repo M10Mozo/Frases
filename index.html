@@ -6,6 +6,21 @@
     <title>Lista de Frases</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Estilo adicional para el modal */
+        .modal.fade .modal-dialog {
+            transform: translateY(-50px);
+            transition: transform 0.3s ease-out;
+        }
+        .modal.show .modal-dialog {
+            transform: translateY(0);
+        }
+        .modal-content {
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,7 +37,7 @@
             <input type="text" class="form-control mb-2" placeholder="Añadir autor" @keyup.enter="add" v-model="nuevoautor">
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary btn-block" @click="add">Añadir</button>
+            <button class="btn btn-primary btn-block" @click="add"><i class="fas fa-plus"></i> Añadir</button>
         </div>
     </div>
 
@@ -41,8 +56,8 @@
                     <td>{{ frace }}</td>
                     <td>{{ autor }}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm mr-2" @click="abrirModal(numeros)">Editar</button>
-                        <button class="btn btn-danger btn-sm" @click="eliminar(numeros)">Eliminar</button>
+                        <button class="btn btn-warning btn-sm mr-2" @click="abrirModal(numeros)"><i class="fas fa-edit"></i> Editar</button>
+                        <button class="btn btn-danger btn-sm" @click="eliminar(numeros)"><i class="fas fa-trash"></i> Eliminar</button>
                     </td>
                 </tr>
             </tbody>
@@ -65,7 +80,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="cerrarModal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" @click="actualizarFrase">Actualizar</button>
+                    <button type="button" class="btn btn-primary" @click="actualizarFrase"><i class="fas fa-check"></i> Actualizar</button>
                 </div>
             </div>
         </div>

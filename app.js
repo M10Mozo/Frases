@@ -32,8 +32,11 @@ const app = createApp({
         const abrirModal = (numeros) => {
             mostrarModal.value = true;
             indiceEdicion = numeros;
-            // Aquí se vacían los campos del modal
-            fraseEditada.value = { frace: '', autor: '' };
+            // Aquí se asignan los valores actuales a editar
+            fraseEditada.value = { 
+                frace: fraces.value[numeros].frace, 
+                autor: fraces.value[numeros].autor 
+            };
         };
 
         const cerrarModal = () => {
