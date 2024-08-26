@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Frases</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="myapp" class="container mt-5">
+    <h1 class="text-center mb-4">Lista de Frases</h1>
+    <h2 class="text-center mb-4">Contador de frases: {{ fraces.length }}</h2>
+
+    <!-- Formulario para añadir una nueva frase -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-5">
+            <input type="text" class="form-control mb-2" placeholder="Añadir frase" @keyup.enter="add" v-model="nuevafrace">
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control mb-2" placeholder="Añadir autor" @keyup.enter="add" v-model="nuevoautor">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-block" @click="add">Añadir</button>
+        </div>
+    </div>
+
+    <!-- Tabla que muestra las frases -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Frase</th>
+                    <th>Autor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="({ frace, autor }, numeros) in fraces" :key="numeros">
+                    <td>{{ frace }}</td>
+                    <td>{{ autor }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm mr-2" @click="abrirModal(numeros)">Editar</button>
+                        <button class="btn btn-danger btn-sm" @click="eliminar(numeros)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para actualizar la frase -->
+    <div v-if="mostrarModal" class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Actualizar Frase</h5>
+                    <button type="button" class="close" @click="cerrarModal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control mb-3" v-model="fraseEditada.frace" placeholder="Editar frase" @keyup.enter="actualizarFrase">
+                    <input type="text" class="form-control" v-model="fraseEditada.autor" placeholder="Editar autor" @keyup.enter="actualizarFrase">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @click="cerrarModal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click="actualizarFrase">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
